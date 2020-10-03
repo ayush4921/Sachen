@@ -10,32 +10,45 @@ today = date.today()
 #drawer2=["sfg",'sgsrg','aegaeg','agaeg']
 #drawer3=["sfg",'sgsrg','aegaeg','agaeg']
 
-Milk = {'RFID': "49 20 B3 B0",
-'Item': 'Milk', 
-'Expiration_date': 10052020, #the number is month, day, year
-'Cabinet_number': 5,
-'In Cabinet': False
+class inventoryItem:
+    def __init__(self, name, id, expiration_date, cabinet_number, inside_cabinet):
+        self.id = id
+        self.name = name
+        self.expiration_date = expiration_date
+        self.cabinet_number = cabinet_number
+        self.inside_cabinet = inside_cabinet
+
+Milk = inventoryItem('Milk', '49 20 B3 B0', 10052020, 5, False)
+Bread = inventoryItem('Bread', '24 2E BE 2B', 10202020, 3, True)
+Eggs = inventoryItem('Eggs', '78 2E BE 2B', 10152020, 8, False)
+#attributes = ['RFID', 'Item', 'Expiration Date', 'Cabinet Number', 'In Cabinet?']
+
+data = {
+    '4920B3B0' : Milk,
+    '242EBE2B' : Bread,
+    '782EBE2B' : Eggs
 }
-Bread = {'RFID': "24 2E BE 2B",
-'Item':'Bread',
-'Expiration_date': 10202020, #the number is month, day, year
-'Cabinet_number': 3,
-'In Cabinet': True
-}
-Eggs = {'RFID': "78 2E BE 2B",
-'Item':'Eggs',
-'Expiration_date': 10152020,
-'Cabinet_number': 8,
-'In Cabinet': False
-}
-df=pd.DataFrame([Milk,Bread,Eggs])
+
+item_list = []
+for key in data:
+    item_obj = data[key]
+    item_list.append(
+        {
+            'RFID' : item_obj.id,
+            'Item': item_obj.name,
+            'Expiration Date': item_obj.expiration_date,
+            'Cabinet Number' : item_obj.cabinet_number,
+            'In Cabinet?' : item_obj.inside_cabinet
+        }
+    )
+df=pd.DataFrame(item_list)
 
 d1 = today.strftime("%d%m%Y")
 print(d1)
 reminders=[]
 for ind in df.index: 
-     if (df['Expiration_date'][ind]-int(d1))>1000000:
-       df['About to expire']="True"
+     if (df['Expiration Date'][ind]-int(d1))>100000:
+       df['About to Expire?']='True'
 
 
 
