@@ -2,10 +2,11 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Pagination table with search option</title>
+  <title>Inventory</title>
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'><link rel="stylesheet" href="..\static\css\style.css">
 
 </head>
+<h1>Inventory</h1>
 <body>
 <!-- partial:index.partial.html -->
 <div class="container">
@@ -13,7 +14,7 @@
         <div class="num_rows">
 		
 				<div class="form-group"> 	<!--		Show Numbers Of Rows 		-->
-			 		<select class  ="form-control" name="state" id="maxRows">
+			 		<select class  ="form-control" name="state" id="maxRows" style="width: 20%;>
 						 
 						 
 						 <option value="10">10</option>
@@ -28,7 +29,8 @@
 			  	</div>
         </div>
         <div class="tb_search">
-<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+<input type="text" id="search_input_all" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control" style="width: 20%;">
+<br>
         </div>
       </div>
   
@@ -74,10 +76,10 @@
 	
 	<h2>Alert Messages</h2>
 	<p>Click on the "x" symbol to close the alert message.</p>
-	{% for item in df.index %}
+	{% for item in abc.index %}
 	<div class="alert">
 		<span class="closebtn">&times;</span>  
-		<strong>{{df['Item'][item]}} is about to expire</strong>
+		<strong>{{abc[0][item]}} is about to expire</strong>
 	</div>
 	{% endfor %}
 	
@@ -102,8 +104,16 @@
 				  </ul>
 				</nav>
 			</div>
-      <div class="rows_count">Showing 11 to 20 of 91 entries</div>
-
+	  <div class="rows_count">Showing 11 to 20 of 91 entries</div>
+	  <br>
+	  <h1>Change Existing Data</h1>
+	  <form method = "POST">
+		<p>Enter RFID : <input type = "text" name = "Name" /></p>
+		<p>Enter New Name : <input type = "text" name = "item" /></p>
+		<p>Enter new expiration date (yyyy/mm/dd): <input type = "text" name = "expiration" /></p>
+		<p>Enter new cabinet number : <input type ="text" name = "cabinet" /></p>
+		<p><input type = "submit" value = "submit" style="background-color: #ff9800;color:antiquewhite;font-size: medium;"/></p>
+	 </form>
 </div> <!-- 		End of Container -->
 
 
